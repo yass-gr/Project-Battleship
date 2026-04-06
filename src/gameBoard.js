@@ -7,6 +7,11 @@ export default class GameBoard {
   }
 
   addShip(startCord, endCord, direction) {
+    if (startCord[0] < 0 || startCord[0] > 9) return false;
+    if (startCord[1] < 0 || startCord[1] > 9) return false;
+    if (endCord[0] < 0 || endCord[0] > 9) return false;
+    if (endCord[1] < 0 || endCord[1] > 9) return false;
+
     let shipLength;
     if (direction === "h") {
       shipLength = endCord[0] - startCord[0] + 1;
@@ -21,6 +26,7 @@ export default class GameBoard {
         this.board[i][startCord[0]] = String(this.ships.length - 1);
       }
     }
+    return true;
   }
 
   reciveAttack(cords) {
