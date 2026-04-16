@@ -2,6 +2,10 @@
 
 A browser-based Battleship game built as a learning project to practice JavaScript, DOM manipulation, and game logic.
 
+## Preview
+
+**Live Demo**: https://yass-gr.github.io/Project-Battleship/
+
 ## Overview
 
 This is a classic Battleship game where you place ships on a grid and try to sink your opponent's fleet before they sink yours. The game features both single-player (vs Computer) and two-player local modes.
