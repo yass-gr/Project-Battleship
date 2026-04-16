@@ -109,11 +109,11 @@ describe("gameBoard tests", () => {
     expect(result).toEqual(false);
   });
 
-  test("overlapping ship placement returns false", () => {
-    board.addShip([2, 2], [2, 4], "h");
-    const result = board.addShip([2, 3], [2, 5], "h");
-    expect(result).toEqual(false);
-  });
+test("overlapping ship placement returns false", () => {
+  board.addShip([2, 2], [4, 2], "h");
+  const result = board.addShip([3, 2], [4, 2], "h");
+  expect(result).toEqual(false);
+});
 
   test("attack on already attacked square does nothing", () => {
     board.addShip([2, 1], [4, 1], "h");
@@ -157,16 +157,16 @@ describe("gameBoard tests", () => {
   });
 
   test("ship with different length", () => {
-    board.addShip([0, 0], [0, 4], "h");
+    board.addShip([0, 0], [4, 0], "h");
     expect(board.ships[0].length).toEqual(5);
   });
 
   test("mixed horizontal and vertical ships", () => {
-    board.addShip([0, 0], [0, 3], "h");
-    board.addShip([5, 0], [7, 0], "v");
+    board.addShip([0, 0], [3, 0], "h");
+    board.addShip([5, 0], [5, 7], "v");
     expect(board.ships.length).toEqual(2);
     expect(board.board[0][0]).toEqual("0");
-    expect(board.board[7][0]).toEqual("0");
+    expect(board.board[7][5]).toEqual("1");
   });
 
   test("get ship at position", () => {

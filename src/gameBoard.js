@@ -15,13 +15,23 @@ export default class GameBoard {
     let shipLength;
     if (direction === "h") {
       shipLength = endCord[0] - startCord[0] + 1;
+      for (let i = startCord[0]; i < startCord[0] + shipLength; i++) {
+        if (this.board[startCord[1]][i] !== null) return false;
+      }
+
       this.ships.push(new Ship(shipLength));
+
       for (let i = startCord[0]; i < startCord[0] + shipLength; i++) {
         this.board[startCord[1]][i] = String(this.ships.length - 1);
       }
     } else if (direction === "v") {
       shipLength = endCord[1] - startCord[1] + 1;
+      for (let i = startCord[1]; i < startCord[1] + shipLength; i++) {
+        if (this.board[i][startCord[0]] !== null) return false;
+      }
+
       this.ships.push(new Ship(shipLength));
+
       for (let i = startCord[1]; i < startCord[1] + shipLength; i++) {
         this.board[i][startCord[0]] = String(this.ships.length - 1);
       }
@@ -36,6 +46,8 @@ export default class GameBoard {
     if (square === null) {
       this.board[rowIndex][colIndex] = "(miss)";
     } else {
+      if (square === "(miss)") return;
+      if (square.length > 2) return;
       this.ships[parseInt(square)].hit();
       this.board[rowIndex][colIndex] += "(hit)";
     }
@@ -44,10 +56,14 @@ export default class GameBoard {
   isAllSunk() {
     return this.ships.every((s) => s.isSunk());
   }
+
+  getShipAt(cords) {
+    const rowIndex = cords[1];
+    const colIndex = cords[0];
+    const square = this.board[rowIndex][colIndex];
+    if (square === null || square.length > 2) return null;
+    return this.ships[parseInt(square)];
+  }
+
+  isOverlapping() {}
 }
-
-let b = new GameBoard();
-
-b.addShip([2, 1], [4, 1], "h");
-b.reciveAttack([0, 0]);
-console.log(b.board);
